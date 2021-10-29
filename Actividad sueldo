@@ -1,0 +1,55 @@
+Funcion sueldo(bruto,contrato,edad,pagas)
+	//declarar variables tipado fuerte
+	Definir Salario_bruto,Tipo_cotizacion,tipo_IRPF,Salario_Neto, bonificacion Como Real
+	Definir Tipo_Contrato Como Caracter
+	Definir years, dinero Como Entero
+	//Una sola letra //Cadena es una palabra
+	Tipo_cotizacion<-0.15
+	Salario_bruto=bruto
+	Si Salario_bruto>1000 Entonces
+		Tipo_cotizacion<-0.2
+	FinSi
+	
+	Tipo_Contrato=contrato
+	Segun Tipo_Contrato Hacer
+		Caso 'I':tipo_IRPF<-0.12
+		Caso 'P':tipo_IRPF<-0.08
+		Caso 'T':tipo_IRPF<-0.02
+	FinSegun
+	years=edad
+	Si edad<18
+		bonificacion=50
+	SiNo
+		Si edad>65
+			bonificacion=75
+		SiNo
+			bonificacion=-100
+		FinSi
+	FinSi
+	dinero=pagas
+	Salario_Neto<-Salario_bruto-[Salario_bruto*(Tipo_cotizacion-tipo_IRPF)]+bonificacion
+	Escribir "Liquido a percibir ", Salario_Neto
+	Si dinero=12
+		Salario_Neto_FINAL=Salario_Neto/12
+		Escribir  redon(Salario_Neto_FINAL)
+	SiNo
+		Salario_Neto_FINAL=Salario_Neto/14
+		Escribir redon(Salario_Neto_FINAL) 
+	FinSi
+FinFuncion
+Algoritmo salario_2
+	Definir bruto Como Real
+	Definir contrato Como Caracter
+	
+	Escribir "Dime Salario Bruto "
+	Leer bruto
+	Escribir "Dime tipo de contrato(I:Indefinido,P:Practicas,T:Temporal)"
+	Leer contrato
+	Escribir "Que edad tienes?"
+	Leer edad
+	Escribir "Cuantas pagas quieres"
+	Leer pagas
+	sueldo(bruto,contrato,edad,pagas)
+	
+	
+FinAlgoritmo
